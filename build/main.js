@@ -1,4 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const countryISO_json_1 = __importDefault(require("./countryISO.json"));
 class List {
     constructor() {
     }
@@ -30,6 +35,43 @@ class List {
         }
         return sum == params;
     }
+    // function getData() {
+    //     return new Promise((resolve, reject) => {
+    //       fetch('https://example.com/data')
+    //         .then(response => {
+    //           if (response.ok) {
+    //             return response.json();
+    //           }
+    //           throw new Error('Request failed');
+    //         })
+    //         .then(data => {
+    //           resolve(data);
+    //         })
+    //         .catch(error => {
+    //           reject(error);
+    //         });
+    //     });
+    //   }
+    Nationalize(params) {
+        return new Promise((resolve, reject) => {
+            fetch("https://api.nationalize.io?name=" + params + "").then(response => {
+                if (response.ok) {
+                    console.log(response.json);
+                    return response.json();
+                }
+                throw new Error('Request failed');
+            }).then(data => {
+                let key = data["country"][0]["country_id"];
+                let country2 = data["country"][0]["country_id"];
+                const country_name = countryISO_json_1.default[country2];
+                const probability = data["country"][0]["probability"] * 100;
+                console.log(country_name + " " + probability.toString() + "%");
+                resolve(data);
+            }).catch(error => {
+                reject(error);
+            });
+        });
+    }
 }
 var list = new List();
 // console.log(list.IsPalindrome(5421))
@@ -37,5 +79,6 @@ var list = new List();
 // console.log(list.IsLower("kijk"))
 // console.log(list.IsAllDigits("12j"))
 // console.log(list.IsAllDigits("123"))
-console.log(list.IsArmstrong(1234));
-console.log(list.IsArmstrong(1634));
+// console.log(list.IsArmstrong(1234))
+// console.log(list.IsArmstrong(1634))
+console.log(list.Nationalize("Yuval"));

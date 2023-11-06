@@ -1,6 +1,0 @@
-// class list{
-//     public constructor(){
-
-//     }
-
-// }
