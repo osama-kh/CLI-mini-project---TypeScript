@@ -1,85 +1,71 @@
-import countryISO from './countryISO.json'
+
+import {Palindrome} from "./palindrome"
+import { Nationalize } from "./Nationalize"
+import {Lower} from "./Lower"
+import {Digits} from "./Digits"
+import {Armstrong} from "./Armstrong"
 
 class List{
+private key:number = 0;
+private operation:any;
     public constructor(){
 
     }
-
-    public IsPalindrome(params:Number) :boolean{
-        let temp : string ="";
-    
-        for(let i:number =params.toString().length-1; i>=0; i-- ){
-            temp +=params.toString()[i]
-
-        }
-
-        return parseInt(temp)==params;
-        
-    }
-
-    public IsLower(params:string):boolean{
-      let temp : string = params.toLowerCase();
-        return params===temp;
-
-    }
-
-    public IsAllDigits(params:string):boolean{
-
-        for(let i : number = 0; i < params.length; i++){
-            if(!/^\d$/.test(params[i])){
-                    return false
-            }
-        }
-        return true;
-    }
-    public IsArmstrong(params:number):boolean{
-        let temp : string = params.toString();
-        const size:number=temp.length;
-        let sum:number=0;
-
-        for(let i : number = 0; i < size; i++){
-        sum+=Math.pow(parseInt(temp[i]),size);
-        }
-        return sum==params;
+    private print_result(val:boolean):void{
+        console.log("the result is: "+val)
     }
 
 
-     public Nationalize (params:string){
-        return new Promise((resolve,reject)=>{
-            fetch("https://api.nationalize.io?name="+params+"").then(
-                response =>{
-                    if(response.ok) {
-                    console.log(response.json)
-                        return response.json();
-                    }
-                    
-                    throw new Error('Request failed');
-
-                }).then(data =>{
-
-                   let key:String = data["country"][0]["country_id"]
-                   let country2: keyof typeof countryISO = data["country"][0]["country_id"];
-                    const country_name:string=countryISO[country2]
-                    const probability:number=data["country"][0]["probability"]*100
-                    console.log(country_name +" "+ probability.toString()+"%")
-                 
-
-                    
-                    resolve(data);
-                }).catch(error =>{
-                    reject(error);
-                });
-                
-
-        })
+    private print_instruction_list():void{
 
     }
+    public run(key:number):void{
 
 
+       switch (key) {
+    case 1:
+         this.operation =new Palindrome()
+         this.print_result(this.operation.command_param_number(132))
+
+        break;
+
+    case 2:
+        this.operation = new Lower()
+        this.print_result(this.operation.command_param_string("HeLlo"))
+
+        break;
+    case 3:
+        this.operation = new Digits()
+        this.print_result(this.operation.command_param_string("123"))
+
+        break;
+    case 4:
+        this.operation = new Armstrong()
+        this.print_result(this.operation.command_param_number(1634))
+
+        break;
+    case 5:
+        this.operation = new Nationalize()
+        this.print_result(this.operation.command_param_string("Yuval"))
+
+        break;
+    case 6:
+
+        break;
+    default:
+        break;
+} 
+    }
 
 }
 
 var list = new List();
+list.run(1)
+list.run(2)
+list.run(3)
+list.run(4)
+list.run(5)
+// list.run(1)
 // console.log(list.IsPalindrome(5421))
 // console.log(list.IsLower("HeLlo"))
 // console.log(list.IsLower("kijk"))
@@ -87,4 +73,4 @@ var list = new List();
 // console.log(list.IsAllDigits("123"))
 // console.log(list.IsArmstrong(1234))
 // console.log(list.IsArmstrong(1634))
-console.log(list.Nationalize("Yuval"))
+// console.log(list.Nationalize("Yuval"))

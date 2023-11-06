@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Palindrome = void 0;
-const BaseCommand_1 = require("./BaseCommand");
-class Palindrome extends BaseCommand_1.BaseCommand {
+class Palindrome extends BaseCommand {
     // public IsPalindrome(params:Number) :boolean{
     //     let temp : string ="";
     //     for(let i:number =params.toString().length-1; i>=0; i-- ){
