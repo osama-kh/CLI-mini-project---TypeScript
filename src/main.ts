@@ -25,7 +25,7 @@ private Exit_flag:boolean=true;
         console.log("3 - Digits - Check if all characters in the input are digits")
         console.log("4 - Armstrong - Check if the input is an 'Armstrong Number'")
         console.log("5 - Nationalize - Check the nationality probability of a given first name        ")
-        console.log("6 - Exit - Exit successfully from the application\n")
+        console.log("6 - Exit - Exit successfully from the application")
 
 // Enter the number of the command: 4
 // Enter the input: 371
@@ -40,7 +40,7 @@ private Exit_flag:boolean=true;
     }
 
     public run():void{
-do{
+ do{
     this.print_instruction_list();
 
     let key: number = parseInt(readlineSync.question('Enter the number of the command: '));

@@ -44,7 +44,7 @@ class List {
         console.log("3 - Digits - Check if all characters in the input are digits");
         console.log("4 - Armstrong - Check if the input is an 'Armstrong Number'");
         console.log("5 - Nationalize - Check the nationality probability of a given first name        ");
-        console.log("6 - Exit - Exit successfully from the application");
+        console.log("6 - Exit - Exit successfully from the application\n");
         // Enter the number of the command: 4
         // Enter the input: 371
         // The answer is: True
@@ -76,7 +76,9 @@ class List {
                     break;
                 case 5:
                     this.operation = new Nationalize_1.Nationalize();
-                    this.print_result(this.operation.command_param_string(this.print_input()));
+                    setTimeout(() => {
+                        return this.print_result(this.operation.command_param_string(this.print_input()));
+                    }, 1000);
                     break;
                 case 6:
                     this.Exit_flag = false;
