@@ -14,7 +14,7 @@ private Exit_flag:boolean=true;
 
     }
     private print_result(val:boolean):void{
-        console.log("the result is: "+val)
+        console.log("the result is: "+val+"\n")
     }
 
 
@@ -25,7 +25,7 @@ private Exit_flag:boolean=true;
         console.log("3 - Digits - Check if all characters in the input are digits")
         console.log("4 - Armstrong - Check if the input is an 'Armstrong Number'")
         console.log("5 - Nationalize - Check the nationality probability of a given first name        ")
-        console.log("6 - Exit - Exit successfully from the application")
+        console.log("6 - Exit - Exit successfully from the application\n")
 
 // Enter the number of the command: 4
 // Enter the input: 371
@@ -39,8 +39,8 @@ private Exit_flag:boolean=true;
         return param;
     }
 
-    public run():void{
- do{
+    public async run():Promise<void>{
+        while(this.Exit_flag){
     this.print_instruction_list();
 
     let key: number = parseInt(readlineSync.question('Enter the number of the command: '));
@@ -64,12 +64,12 @@ private Exit_flag:boolean=true;
     case 4:
         
         this.operation = new Armstrong()
-        this.print_result(this.operation.command_param_number(parseInt(this.print_input())))
-
+        this.print_result( this.operation.command_param_number(parseInt(this.print_input())))
         break;
     case 5:
         this.operation = new Nationalize()
-        this.print_result(this.operation.command_param_string(this.print_input()))
+         await this.operation.command_param_string(this.print_input())
+     
 
         break;
     case 6:
@@ -78,7 +78,7 @@ private Exit_flag:boolean=true;
     default:
         break;
 } 
-}while(this.Exit_flag)
+}
    
     }
 

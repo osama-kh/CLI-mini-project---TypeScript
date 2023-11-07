@@ -22,6 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const palindrome_1 = require("./palindrome");
 const Nationalize_1 = require("./Nationalize");
@@ -35,7 +44,7 @@ class List {
         this.Exit_flag = true;
     }
     print_result(val) {
-        console.log("the result is: " + val);
+        console.log("the result is: " + val + "\n");
     }
     print_instruction_list() {
         console.log("The available commands are:");
@@ -54,39 +63,39 @@ class List {
         return param;
     }
     run() {
-        do {
-            this.print_instruction_list();
-            let key = parseInt(readlineSync.question('Enter the number of the command: '));
-            switch (key) {
-                case 1:
-                    this.operation = new palindrome_1.Palindrome();
-                    this.print_result(this.operation.command_param_number(parseInt(this.print_input())));
-                    break;
-                case 2:
-                    this.operation = new Lower_1.Lower();
-                    this.print_result(this.operation.command_param_string(this.print_input()));
-                    break;
-                case 3:
-                    this.operation = new Digits_1.Digits();
-                    this.print_result(this.operation.command_param_string(this.print_input()));
-                    break;
-                case 4:
-                    this.operation = new Armstrong_1.Armstrong();
-                    this.print_result(this.operation.command_param_number(parseInt(this.print_input())));
-                    break;
-                case 5:
-                    this.operation = new Nationalize_1.Nationalize();
-                    setTimeout(() => {
-                        return this.print_result(this.operation.command_param_string(this.print_input()));
-                    }, 1000);
-                    break;
-                case 6:
-                    this.Exit_flag = false;
-                    break;
-                default:
-                    break;
+        return __awaiter(this, void 0, void 0, function* () {
+            while (this.Exit_flag) {
+                this.print_instruction_list();
+                let key = parseInt(readlineSync.question('Enter the number of the command: '));
+                switch (key) {
+                    case 1:
+                        this.operation = new palindrome_1.Palindrome();
+                        this.print_result(this.operation.command_param_number(parseInt(this.print_input())));
+                        break;
+                    case 2:
+                        this.operation = new Lower_1.Lower();
+                        this.print_result(this.operation.command_param_string(this.print_input()));
+                        break;
+                    case 3:
+                        this.operation = new Digits_1.Digits();
+                        this.print_result(this.operation.command_param_string(this.print_input()));
+                        break;
+                    case 4:
+                        this.operation = new Armstrong_1.Armstrong();
+                        this.print_result(this.operation.command_param_number(parseInt(this.print_input())));
+                        break;
+                    case 5:
+                        this.operation = new Nationalize_1.Nationalize();
+                        yield this.operation.command_param_string(this.print_input());
+                        break;
+                    case 6:
+                        this.Exit_flag = false;
+                        break;
+                    default:
+                        break;
+                }
             }
-        } while (this.Exit_flag);
+        });
     }
 }
 var list = new List();
